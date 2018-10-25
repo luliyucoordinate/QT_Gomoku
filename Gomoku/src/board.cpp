@@ -20,7 +20,7 @@ void Board::PlacePiece(int row, int col, QColor color)
     _board[row][col] = Piece(row, col, ++_round, color);
     _pieceStack.push(_board[row][col]);
     update();
-    if (_checkWin(row, col, color)) emit gameOver(color);
+    if (CheckWin(row, col, color)) emit gameOver(color);
     else if (_round == pow(eBoardSize-1, 2)) emit gameOver(Qt::transparent);
 }
 

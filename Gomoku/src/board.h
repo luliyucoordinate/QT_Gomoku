@@ -18,7 +18,7 @@ public:
     //Set member functions
     void SetColor(QColor color) { _pieceColor = color; }
     void SetBlock(bool block) { _isBlocked = block; }
-    void setHidden(bool hidden) { _isHidden = hidden; }
+    void SetHidden(bool hidden) { _isHidden = hidden; }
 
     void PlacePiece(int row, int col, QColor color);
     void Undo(int round);
@@ -47,9 +47,9 @@ private:
 
 
 private:
-    bool _checkWin(int row, int col, QColor color) const;
-    bool _isOnBoard(int row, int col) const { return 0 <= row && row < eBoardSize && 0 <= col && col < eBoardSize; }
-    bool _isAvaliable(int row, int col) const { return _isOnBoard(row, col) && _board[row][col].GetColor() == Qt::transparent; }
+    bool CheckWin(int row, int col, QColor color) const;
+    bool IsOnBoard(int row, int col) const { return 0 <= row && row < eBoardSize && 0 <= col && col < eBoardSize; }
+    bool IsAvaliable(int row, int col) const { return IsOnBoard(row, col) && _board[row][col].GetColor() == Qt::transparent; }
 
 signals:
     void piecePlaced(int row, int col, QColor color);
