@@ -25,12 +25,14 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
     src/main.cpp \
-    src/mainwindow.cpp \
-    src/piece.cpp
+    src/piece.cpp \
+    src/gomoku.cpp
 
 HEADERS += \
-    src/mainwindow.h \
-    src/piece.h
+    src/piece.h \
+    src/gomoku.h
 
 FORMS += \
-    ui/mainwindow.ui
+    ui/gomoku.ui
+
+DISTFILES +=
