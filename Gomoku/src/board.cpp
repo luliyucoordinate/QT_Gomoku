@@ -11,7 +11,7 @@ Board::Board(QWidget *parent) :
     _pieces(0),
     _pieceColor(Qt::white)
 {
-
+    this->setMouseTracking(true);
 }
 
 void Board::PlacePiece(int row, int col, QColor color)
@@ -171,6 +171,31 @@ void Board::mousePressEvent(QMouseEvent *event)
             }
         }
     }
+}
+
+bool Board::CheckWin(int row, int col, QColor color) const
+{
+    for (int i = 0, j = 0; i < eBoardSize; i = j + 1)
+    {
+        for (j = i; j < eBoardSize && _board[j][col].GetColor() == color; ++j);
+        if (j - i >= 5) return true;
+    }
+    for (int i = 0, j = 0; i < eBoardSize; i = j + 1)
+    {
+        for (j = i; j < eBoardSize && _board[row][j].GetColor() == color; ++j);
+        if (j - i >= 5) return true;
+    }
+    for (int i = 0, j = 0, k = 0; i < eBoardSize; i = j + 1)
+    {
+        for (j = i; k = j - row + col, 0 <= k && k < eBoardSize && _board[j][col].GetColor() == color; ++j);
+        if (j - i >= 5) return true;
+    }
+    for (int i = 0, j = 0, k = 0; i < eBoardSize; i = j + 1)
+    {
+        for (j = i; k = row +col - j, 0 <= k && k < eBoardSize && _board[j][col].GetColor() == color; ++j);
+        if (j - i >= 5) return true;
+    }
+    return false;
 }
 
 

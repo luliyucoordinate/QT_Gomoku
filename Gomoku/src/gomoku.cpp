@@ -26,3 +26,8 @@ void Gomoku::SetBlock(bool isBlock)
 {
 
 }
+
+void Gomoku::Initialize()
+{
+
+}
