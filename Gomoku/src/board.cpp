@@ -38,6 +38,26 @@ void Board::Undo(int round)
     update();
 }
 
+void Board::RevertColor()
+{
+    if (_pieceColor == Qt::white) _pieceColor = Qt::black;
+    else _pieceColor = Qt::white;
+}
+
+void Board::Clear()
+{
+    _round = 0;
+    _pieces = 0;
+    for (unsigned int i = 0; i < eBoardSize; ++i)
+    {
+        for (unsigned int j = 0; j < eBoardSize; ++j)
+        {
+            _board[i][j] = Piece();
+        }
+    }
+    update();
+}
+
 void Board::resizeEvent(QResizeEvent *event)
 {
     QWidget::resizeEvent(event);
@@ -60,13 +80,14 @@ void Board::paintEvent(QPaintEvent *event)
     painter.setBrush(QColor(255, 255, 170));
     if (_isHidden) painter.setBrush(Qt::transparent);
 
-    int frameWidth = (eBoardSize + 1) * _cellWidth;
+    double frameWidth = (eBoardSize + 1) * _cellWidth;
     painter.drawRect(-frameWidth/2, -frameWidth/2, frameWidth, frameWidth);
 
     // board grid
     painter.setPen(Qt::black);
-    int halfWidth = (eBoardSize - 1)/2;
-    for (int i = -halfWidth; i <= halfWidth; ++i)
+    int halfSize = (eBoardSize - 1)/2;
+    double halfWidth = (eBoardSize - 1)*_cellWidth/2;
+    for (int i = -halfSize; i <= halfSize; ++i)
     {
         painter.drawLine(-halfWidth, i*_cellWidth, halfWidth, i*_cellWidth);
         painter.drawLine(i*_cellWidth, -halfWidth, i*_cellWidth, halfWidth);

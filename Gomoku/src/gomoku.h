@@ -2,6 +2,7 @@
 #define GOMOKU_H
 
 #include <QMainWindow>
+#include <QColor>
 
 namespace Ui {
 class Gomoku;
@@ -34,6 +35,10 @@ private:
 
 signals:
     void disconnected();
+
+private slots:
+    void onMove(int row, int col, QColor color);
+    void onGameOver(QColor color);
 
 };
 

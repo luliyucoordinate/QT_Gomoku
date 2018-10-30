@@ -22,6 +22,8 @@ public:
 
     void PlacePiece(int row, int col, QColor color);
     void Undo(int round);
+    void RevertColor();
+    void Clear();
 
 protected:
     void resizeEvent(QResizeEvent* event) override;
