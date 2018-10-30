@@ -8,13 +8,13 @@ Gomoku::Gomoku(QWidget *parent) :
     ui(new Ui::Gomoku),
     _mode(eSingle),
     _color(Qt::black),
-    _isStarted(false),
-    _isBlocked(false),
     _canUndo(false)
 {
     ui->setupUi(this);
     connect(ui->board, &Board::piecePlaced, this, &Gomoku::onMove);
     connect(ui->board, &Board::gameOver, this, &Gomoku::onGameOver);
+    connect(&_timer, &QTimer::timeout, this, &Gomoku::onTimeOut);
+    Initialize();
 }
 
 Gomoku::~Gomoku()
@@ -27,14 +27,17 @@ void Gomoku::closeEvent(QCloseEvent *event)
     emit disconnected();
 }
 
-void Gomoku::SetBlock(bool isBlock)
-{
-
-}
 
 void Gomoku::Initialize()
 {
     ui->board->SetHidden(false);
+    ui->draw->setEnabled(false);
+    ui->resign->setEnabled(false);
+    ui->withDraw->setEnabled(false);
+    ui->play1AllTimeLcd->display("00");
+    ui->play1CountDownLcd->display("00");
+    ui->play2AllTimeLcd->display("00");
+    ui->play2CountDownLcd->display("00");
 }
 
 void Gomoku::onMove(int row, int col, QColor color)
@@ -42,7 +45,6 @@ void Gomoku::onMove(int row, int col, QColor color)
     switch (_mode)
     {
     case eSingle:
-        if (_isStarted) return;
         ui->board->RevertColor();
         break;
     default:
@@ -67,5 +69,17 @@ void Gomoku::onGameOver(QColor color)
         default:
             break;
         }
+    }
+}
+
+void Gomoku::onTimeOut()
+{
+    _timeLeft--;
+    int play1, play2;
+    if ((_mode == eNetwork) ||
+        (_mode == eSingle && ui->board->GetColor() == Qt::white) ||
+        (_mode == eAI && ui->board->GetColor() == Qt::white))
+    {
+
     }
 }
