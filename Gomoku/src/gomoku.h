@@ -24,16 +24,21 @@ private:
     Ui::Gomoku *ui;
     EMode _mode;
     QColor _color;
+    bool _isStart;
+    bool _isBlock;
     bool _canUndo;
     enum EHostType {eClient, eServer};
+    EHostType _type, _currentPlayer;
+    enum {eTimeLimit = 30};
 
     QTimer _timer;
     int _timeLeft;
-    int play1TotalTime;
-    int play2TotalTime;
+    int _play1TotalTime;
+    int _play2TotalTime;
 
 private:
     void Initialize();
+    void SetBlock(bool isBlock);
 
 
 signals:
@@ -44,6 +49,14 @@ private slots:
     void onGameOver(QColor color);
     void onTimeOut();
 
+    void start();
+    void draw();
+    void resign();
+    void withDraw();
+
+    void nextMove();
+    void play1Move(int row, int col, QColor color);
+    void play2Move(int row, int col, QColor color);
 };
 
 #endif // GOMOKU_H

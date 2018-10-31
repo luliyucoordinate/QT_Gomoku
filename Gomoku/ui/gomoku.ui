@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>790</width>
+    <width>811</width>
     <height>575</height>
    </rect>
   </property>
@@ -21,21 +21,6 @@
   </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QHBoxLayout" name="horizontalLayout_2">
-    <property name="spacing">
-     <number>0</number>
-    </property>
-    <property name="leftMargin">
-     <number>9</number>
-    </property>
-    <property name="topMargin">
-     <number>9</number>
-    </property>
-    <property name="rightMargin">
-     <number>9</number>
-    </property>
-    <property name="bottomMargin">
-     <number>0</number>
-    </property>
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_5">
       <item>
@@ -209,11 +194,18 @@
        </widget>
       </item>
       <item>
+       <widget class="QPushButton" name="start">
+        <property name="text">
+         <string>开始</string>
+        </property>
+       </widget>
+      </item>
+      <item>
        <layout class="QHBoxLayout" name="horizontalLayout">
         <item>
          <widget class="QPushButton" name="draw">
           <property name="text">
-           <string>求和</string>
+           <string>和棋</string>
           </property>
          </widget>
         </item>
@@ -411,7 +403,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>790</width>
+     <width>811</width>
      <height>22</height>
     </rect>
    </property>
