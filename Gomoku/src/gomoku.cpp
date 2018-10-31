@@ -160,5 +160,32 @@ void Gomoku::nextMove()
 
 void Gomoku::play1Move(int row, int col, QColor color)
 {
+    SetBlock(false);
+    _timeLeft = eTimeLimit + 1;
+    _play1TotalTime--;
+    _timer.start(1000);
+    onTimeOut();
+}
 
+void Gomoku::play2Move(int row, int col, QColor color)
+{
+    switch (_mode) {
+    case eSingle:
+        if (_isStart) return;
+        ui->board->RevertColor();
+        _timeLeft = eTimeLimit + 1;
+        _timer.start(1000);
+        onTimeOut();
+        break;
+    case eNetwork:
+        _canUndo = row > 0;
+        ui->withDraw->setEnabled(ui->board->GetPieces() && _canUndo);
+        SetBlock(true);
+        _timeLeft = eTimeLimit + 1;
+        _play2TotalTime--;
+        _timer.start(1000);
+        onTimeOut();
+    default:
+        break;
+    }
 }
